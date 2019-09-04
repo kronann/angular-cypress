@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var express = require('express');
 var http = require('http');
-var uuid = require('node-uuid');
+// var uuid = require('node-uuid');
 var cors = require('./cors');
 var app = express();
 var server = http.createServer(app);
@@ -30,16 +30,19 @@ function loadProduct() {
 
 var createHandler = function (req, res) {
   basket.push(req.body);
+
+  currentProduct = {};
   products = products
     .map(product => {
-      if (product.title.toUpperCase() === req.body.title.toUpperCase()) {
+    if (product.title.toUpperCase() === req.body.title.toUpperCase()) {
         product.stock--;
+        currentProduct = product;
       }
       return product;
     })
     .filter(product => product.stock > 0)
 
-  res.send(201, req.body);
+  res.send(201, currentProduct);
 }
 
 app.post(context + '/basket', createHandler);
@@ -56,4 +59,4 @@ app.get(context + '/basket', function (req, res) {
 });
 
 server.listen(conf.port);
-console.log('Express server listening on port', server.address().port);
+console.log('Express server listening on port', server.address());
