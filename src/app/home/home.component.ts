@@ -3,10 +3,10 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Product} from '../model/product';
 import {Select, Store} from "@ngxs/store";
 import {Observable} from 'rxjs/index';
-import {ProductState, ProductStateModel} from '../shared/product.state';
+import {ProductState} from '../shared/product.state';
 import {GetProducts} from '../shared/product.action';
 import {AddProductToBasket, GetBasket} from '../shared/basket.action';
-import {BasketState, BasketStateModel} from '../shared/basket.state';
+import {BasketState} from '../shared/basket.state';
 import {map} from "rxjs/internal/operators";
 
 @Component({
@@ -17,9 +17,9 @@ import {map} from "rxjs/internal/operators";
 export class HomeComponent implements OnInit {
 
   @Select(ProductState.products)
-  private eStoreProducts$: Observable<ProductStateModel>;
+  private eStoreProducts$: Observable<Product[]>;
   @Select(BasketState.products)
-  private basketProducts$: Observable<BasketStateModel>;
+  private basketProducts$: Observable<Product[]>;
 
   private total$: Observable<any>;
 
@@ -45,6 +45,6 @@ export class HomeComponent implements OnInit {
 
   getTotal() {
     return this.basketProducts$.pipe(
-      map((p: Product[]) => p.reduce((current, next) => current + next.price, 0)));
+      map((p:Product[]) => p.reduce((current, next) => current + next.price, 0)));
   }
 }
