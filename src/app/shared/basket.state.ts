@@ -58,7 +58,7 @@ export class BasketState {
   @Action(CheckoutSuccess)
   orderSuccess({patchState}: StateContext<BasketStateModel>) {
     patchState({status: 'success'});
-    this.router.navigate([''])
+    this.router.navigate(['confirmation'])
   }
 
   @Action(CheckoutFailed)

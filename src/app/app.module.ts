@@ -18,6 +18,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import {ProductState} from './shared/product.state';
 import {BasketState} from './shared/basket.state';
 import {ProductService} from './services/product.service';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 registerLocaleData(localeFr);
 
@@ -28,7 +29,8 @@ registerLocaleData(localeFr);
     MenuComponent,
     SortPipe,
     HomeComponent,
-    BasketComponent
+    BasketComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
