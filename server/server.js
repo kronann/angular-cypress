@@ -50,7 +50,7 @@ app.post(context + '/basket', createHandler);
 app.post(context + '/basket/confirm', (req, res) => {
   console.log(`Commande n°${++orderNumber} : ${basket.reduce((total, item)=>total+item.price, 0)}€ ${req.body.name} ${req.body.address} ${req.body.creditCard}`);
   basket = [];
-  products = loadProduct();
+  //products = loadProduct();
   res.send(200, {orderNumber: orderNumber});
 });
 
