@@ -58,5 +58,11 @@ app.get(context + '/basket', function (req, res) {
   res.send(basket);
 });
 
+app.get(context + '/reset', (req, res) => {
+  console.log('RAZ des produits sur le serveur')
+  products = loadProduct();
+  res.send(204, null);
+});
+
 server.listen(conf.port);
 console.log('Express server listening on port', server.address());
