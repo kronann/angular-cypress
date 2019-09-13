@@ -59,8 +59,9 @@ app.get(context + '/basket', function (req, res) {
 });
 
 app.get(context + '/reset', (req, res) => {
-  console.log('RAZ des produits sur le serveur')
+  console.log('RAZ des produits et du panier sur le serveur')
   products = loadProduct();
+  basket = [];
   res.send(204, null);
 });
 
