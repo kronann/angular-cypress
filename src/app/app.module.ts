@@ -46,7 +46,7 @@ registerLocaleData(localeFr);
   providers: [
     ProductService,
     {provide: 'welcomeMsg', useValue: 'Bienvenue sur Zenika Ecommerce'},
-    {provide: LOCALE_ID, useValue: navigator.language}
+    {provide: LOCALE_ID, useValue: "fr"}
   ],
   bootstrap: [AppComponent]
 })
