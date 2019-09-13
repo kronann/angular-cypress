@@ -21,6 +21,15 @@
         <textarea id="address" class="form-control" [(ngModel)]="customer.address" name="address" required #address="ngModel"></textarea>
       </div>
 
+      <div class="form-group">
+        <label for="formateur" class="control-label">Quel formateur a la plus belle barbe?</label>
+        <select name="formateur" id="formateur" class="form-control">
+          <option value="" default>Ne se prononce pas</option>
+          <option value="david">David</option>
+          <option value="greg">Greg</option>
+        </select>
+      </div>
+
       <div class="form-group" [class.has-error]="!creditCard.valid">
         <label class="control-label" for="creditCard">Credit card number</label>
         <input id="creditCard" class="form-control" [(ngModel)]="customer.creditCard" name="creditCard" pattern="^[0-9]{3}-[0-9]{3}$" #creditCard="ngModel">
