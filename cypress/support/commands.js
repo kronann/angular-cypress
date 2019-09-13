@@ -26,5 +26,5 @@
 
 
 Cypress.Commands.add("resetServer", () => {
-    cy.request('http://localhost:8080/rest/reset');
+    cy.request('DELETE', 'http://localhost:8080/rest/reset');
 })

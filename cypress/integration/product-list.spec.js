@@ -1,10 +1,8 @@
 describe('Retry End 2 End test', () => {
 
     beforeEach(() => {
-
         cy.resetServer();
-
-        cy.visit('http://localhost:4209')
+        cy.visit('/')
     })
 
     function addToteBag() {

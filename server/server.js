@@ -57,12 +57,11 @@ app.post(context + '/basket/confirm', (req, res) => {
 app.get(context + '/basket', function (req, res) {
   res.send(basket);
 });
-
-app.get(context + '/reset', (req, res) => {
-  console.log('RAZ des produits et du panier sur le serveur')
-  products = loadProduct();
-  basket = [];
-  res.send(204, null);
+app.del(context + '/reset', (req, res) => {
+    console.log('RAZ des produits et du panier sur le serveur')
+    basket = [];
+    products = loadProduct();
+    res.send(201);
 });
 
 server.listen(conf.port);

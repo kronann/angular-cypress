@@ -30,4 +30,7 @@ export class ProductComponent implements OnInit {
     return this.productService.isTheLast(this.data);
   }
 
+  getId(){
+      return this.data.title.split(' ').join('').toLocaleLowerCase();
+  }
 }
