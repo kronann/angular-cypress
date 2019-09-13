@@ -1,7 +1,7 @@
 <header class="jumbotron hero-spacer">
   <h1>{{title}}</h1>
-  <p>Votre panier s'élève à {{ total$ | async | currency:'EUR'}}</p>
-  <p><a class="btn btn-primary btn-large" [routerLink]="['/basket']">Voir mon panier</a></p>
+  <p>Votre panier s'élève à <span id="basketTotal">{{ total$ | async | currency:'EUR'}}</span></p>
+  <p><a id="goBasket" class="btn btn-primary btn-large" [routerLink]="['/basket']">Voir mon panier</a></p>
 </header>
 
 <hr>
