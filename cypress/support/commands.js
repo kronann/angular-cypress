@@ -28,3 +28,12 @@
 Cypress.Commands.add("resetServer", () => {
     cy.request('DELETE', 'http://localhost:8080/rest/reset');
 })
+
+Cypress.Commands.add("clickOnProduct", (productName) => {
+    cy.get('app-product h3')
+        .contains(productName)
+        .parent()
+        .within(() => {
+            cy.get('button').click()
+        });
+})
