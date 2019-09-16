@@ -5,15 +5,6 @@ describe('Retry End 2 End test', () => {
         cy.visit('/')
     })
 
-    function addToteBag() {
-        cy.get('app-product h3')
-        .contains('TOTE BAG')
-        .parent()
-        .within(() => {
-            cy.get('button').click()
-        })
-    }
-
     describe('Products list', () => {
         it('should display 4 products with plenty of stock', ()=> {
             cy.get('app-product .product-item').should('length', 4)
@@ -33,13 +24,13 @@ describe('Retry End 2 End test', () => {
     describe('Adding a product to basket', () => {
 
         it('should update basket total accordingly', () => {
-            addToteBag();
+            cy.clickOnProduct('TOTE BAG')
             
             cy.get('#basketTotal').should('contain','12,50\u00a0€')
         })
 
         it('should indicate if last item', () => {
-            addToteBag();
+            cy.clickOnProduct('TOTE BAG')
             
             cy.get('app-product h3')
             .contains('TOTE BAG')
@@ -49,8 +40,8 @@ describe('Retry End 2 End test', () => {
         })
 
         it('should not display out of stock item', () => {
-            addToteBag();
-            addToteBag();
+            cy.clickOnProduct('TOTE BAG')
+            cy.clickOnProduct('TOTE BAG')
             
             cy.get('app-product h3')
             .contains('TOTE BAG')
@@ -58,8 +49,8 @@ describe('Retry End 2 End test', () => {
         })
 
         it('should display 1 line per item in basket', () => {
-            addToteBag();
-            addToteBag();
+            cy.clickOnProduct('TOTE BAG')
+            cy.clickOnProduct('TOTE BAG')
 
             cy.get('#goBasket').click();
 
