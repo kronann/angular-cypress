@@ -20,11 +20,7 @@ Vous allez devoir installer, configurer et écrire des tests e2e avec un framewo
  
 ### Configuration du projet
 
-Pour démarrer, il va falloir installer Cypress sur le projet :
-
-`npm i cypress --save-dev` ou `yarn add cypress --dev` *(nous continuerons avec npm pour la suite)*
-
-Voila c'est fait !
+Pour démarrer, clonez ce repo et lancer `npm ci` pour installer toutes les dépendances.
 
 Pour tester que tout se passe correctement, lancez :
 
@@ -32,13 +28,16 @@ Pour tester que tout se passe correctement, lancez :
  * le serveur -> `npm run start-server`  (le back tourne sous le port 8080)
  
  Ou `npm run start-all` pour lancer les deux.
- 
- Puis vous pouvez lancer : `npm run cy:open`
+
+
+Il va maintenant falloir installer Cypress sur le projet : `npm i cypress --save-dev` 
+
+Une fois que c'est fait vous pouvez lancer : `npm run cy:open` :tada:
 
 Cypress va lancer son *Test Runner*  et vous créer un répertoire contenant des examples. 
 Vous pouvez manipuler l'interface pour découvrir le produit.
 
-### 1 - Créér son premier test Cypress
+### 1 - Créér son premier test Cypress 
 
 Placez vous dans le répertoire à la racine du projet "cypress/integration", créér un fichier "product.spec.js"
 Le fichier sera automatiquement découvert par Cypress (vous pouvez le voir dans l'interface apparaitre). 
@@ -55,14 +54,18 @@ describe('Actions on product page', () => {
 
 ```
 
-Vous devez naviguer vers la page d'accueil de l'application et vérifié la valeur de l'élement contenant le total du panier.
+Contenu de votre premier test :
+
+- [ ] Naviguez vers la page d'accueil de l'application
+- [ ] Vérifiez la valeur de l'élément contenant le total du panier.
+    Attention il y a un piège : un _espace insécable_ entre le montant et la devise. Code unicode _\u00a0_
 
 ### 2 - Liste de produits
 
  Pour compléter le premier test sur les produits, nous allons écrire 2 autres tests :
  
-  * Vérifiez que les titres des produits sont bien présentés dans l'ordre alphabétique lors de l'affichage.
-  * Vérifiez que la liste propose 4 produits et qu'ils ne s'affichent pas en tant que dernier examplaire du stock (voir css).
+- [ ] Vérifiez que les titres des produits sont bien présentés dans l'ordre alphabétique lors de l'affichage.
+- [ ] Vérifiez que la liste propose 4 produits et qu'ils ne s'affichent pas en tant que dernier examplaire du stock (voir css).
   
 ### 3 - Ajouter un produit au panier
 
@@ -94,28 +97,50 @@ Vous allez certainement avoir des problèmes pour lancer un test ou plusieurs et
 Une API est disponible pour resetter les produits et le panier :
 `{serverUrl}/rest/reset'`
 
-Utiliser *cy.request* avant chaque test pour partir sur une 'base clean'.
+Utilisez *cy.request* avant chaque test pour partir sur une 'base clean'.
 
 Ensuite écrire les tests pour :
 
- * Vérifier la bonne mise à jour du total lorsqu'on ajoute un produit.
- * Vérifier que lorsque que le stock d'un produit est bien le dernier affiché, il soit bien présenté d'une manière différente.
- * Vérifier si un produit n'est plus en stock, il ne soit pas présenté.
- * Un peu plus compliqué, vérifier que la quantité de produit ajouté dans le panier soit bien visible dans la page lié au panier (une quantité == 1 ligne affichée).
+- [ ] Vérifier que lorsqu'on ajoute un produit, le total du panier est bien mis à jour
+- [ ] Vérifier que lorsque qu'il ne reste plus qu'un exemplaire d'un produit, il soit bien présenté d'une manière différente. (Le stock initial de chaque produit est de 2)
+- [ ] Vérifier qu'un produit qui n'est plus en stock, ne s'affiche pas.
 
-Il est possible de donner créer des commandes sous Cypress, en gros des fontions que Cypress pourra interpréter au sein d'un wrapper.
+Il est possible de créer des commandes sous Cypress, en gros des fonctions que vous pourrez réutiliser dans tous vos tests Cypress.
 
-Essayer de créer une commande *cy.resetServer()* utilisable dans votre fichier *.spec.js.
+Essayez de créer une commande *cy.resetServer()* utilisable dans votre fichier *.spec.js.
 
 Vous trouverez des examples dans le fichier *support/command.js*.
 
 > *FACULTATIF* -> Enfin, il est peut être temps de refactorer vos tests, si vous avez dù créér et dupliquer une routine pour ajouter un produit au panier, 
-crééz une fonction `addProduct(productName)` et utilisez la.
+crééz une fonction `addProduct(productName)` et utilisez-la.
 
 ### 4 - Remplir un formulaire
 
-...
+Pour le premier test : 
+- [ ] Ajoutez un produit puis naviguez vers le panier. 
+- [ ] Remplissez le formulaire  puis vérifiez que le bouton de validation soit clickable sans encore cliquer dessus.
+
+Ensuite : 
+- [ ] Ajoutez deux produits identiques, ajoutez un autre produit (3 en tout) puis naviguer vers le panier.
+- [ ] Vérifiez que les `list-group-item` apparaissent 3 fois et que le premier ou dernier item est bien celui que vous avez  ajouté au préalable.
+
+Il peut être sympa de créer une fonction pour remplir automatiquement le formulaire.
 
 ### 5 - Valider la commmande
 
-... 
+Pour cette dernière partie vous allez tester le scénario complet : ajouter des produits au panier, remplir le formulaire et commander.
+
+
+En s'appuyant sur le test précédent : 
+- [ ] Vérifiez que lors du click sur le bouton de validation (le formulaire doit être correctement rempli), l'url appelée ensuite est bien `http://localhost:4209/confirmation'`
+- [ ] Le message 'Commande confirmée' doit apparaitre dans l'application.
+
+Pour le dernier test :
+- [ ] Videz le stock d'un produit
+- [ ] Naviguez vers la page de commande puis remplissez le formulaire
+- [ ] Validez la commande
+- [ ] Revenez sur la page d'accueil
+- [ ] Vérifiez que le produit que vous avez commandé n'est plus disponible dans la page et que le total du panier est égale à 0
+
+
+
