@@ -61,7 +61,7 @@ app.del(context + '/reset', (req, res) => {
     console.log('RAZ des produits et du panier sur le serveur')
     basket = [];
     products = loadProduct();
-    res.send(201);
+    res.send(204);
 });
 
 server.listen(conf.port);
