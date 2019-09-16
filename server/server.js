@@ -50,19 +50,17 @@ app.post(context + '/basket', createHandler);
 app.post(context + '/basket/confirm', (req, res) => {
   console.log(`Commande n°${++orderNumber} : ${basket.reduce((total, item)=>total+item.price, 0)}€ ${req.body.name} ${req.body.address} ${req.body.creditCard}`);
   basket = [];
-  //products = loadProduct();
   res.send(200, {orderNumber: orderNumber});
 });
 
 app.get(context + '/basket', function (req, res) {
   res.send(basket);
 });
-
-app.get(context + '/reset', (req, res) => {
-  console.log('RAZ des produits et du panier sur le serveur')
-  products = loadProduct();
-  basket = [];
-  res.send(204, null);
+app.del(context + '/reset', (req, res) => {
+    console.log('RAZ des produits et du panier sur le serveur')
+    basket = [];
+    products = loadProduct();
+    res.send(204);
 });
 
 server.listen(conf.port);
