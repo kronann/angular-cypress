@@ -34,6 +34,6 @@ Cypress.Commands.add("clickOnProduct", (productName) => {
         .contains(productName)
         .parent()
         .within(() => {
-            cy.get('button').click()
+            cy.contains("Ajoutez au panier").click()
         });
 })
